@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Attendo - An online Attendance Monitoring System</title>
+  <nav class="navbar navbar-dark bg-dark" style="position: fixed; width:100%; opacity:1.5;">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand" style="color:white;">Attendo</a>
+
+      <div style="margin-left: 1000px; padding-right:20px;">
+        <a href="#add"><button class="btn btn-dark" type="submit">Add</button></a>
+      </div>
+      <button class="btn btn-dark" type="submit">Logout</button>
+
+    </div>
+  </nav>
+</head>
+
+<body style="background: url('/static/bgpic.jpg') no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover; ;">
+  <h1 style="text-align:center; padding-top:80px;">Online Attendance Monitoring System</h1>
+  <div class=container style="padding:40px;">
+
+    <div class='mt-3 text-center'>
+      <h3 style="font-size: 22px;">{{ datetoday2 }} | <span id="clock"></span></h3>
+    </div>
+
+    {% if mess%}
+    <p class="text-center" style="color: red;font-size: 20px;">{{ mess }}</p>
+    {% endif %}
+
+    <table class="table">
+      <thead class="thead-dark" style="opacity:0.8;">
+        <tr>
+          <th scope="col">S.no</th>
+          <th scope="col">Name of Student</th>
+          <th scope="col">Roll no</th>
+          <th scope="col">Time of attendance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if l %}
+
+        {% for i in range(l) %}
+        <tr>
+          <td>{{ i+1 }}</td>
+          <td>{{ names[i] }}</td>
+          <td>{{ rolls[i] }}</td>
+          <td>{{ times[i] }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center" style="padding-right:10px;padding-top:20px;">
+      <a style="text-decoration: none; max-width: 300px;margin:500px" href="/attendance">
+        <button type="submit" class="btn btn-secondary btn-lg">Take Attendance</button>
+      </a>
+    </div>
+  </div>
+  <br>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <section id="add">
+    <h1 style="text-align:center; padding-top:80px;">Add New User</h1>
+    <form action='/addUser' method="POST" enctype="multipart/form-data">
+      <div class="col-xl-9" style="padding:40px; padding-left:400px;">
+        <form style="align-items:center;">
+          <div class="form-group ">
+            <label for="1"><b>Full Name</b></label>
+            <input type="name" class="form-control" id="newusername" name="newusername" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label for="2"><b>Roll number</b></label>
+            <input type="number" class="form-control" id="newuserid" name="newuserid" placeholder="Enter roll number">
+          </div>
+        </form>
+        <div class="text-center" style="padding-right:10px;padding-top:20px;">
+          <button type="submit" class="btn btn-secondary btn-lg">Add Details</button>
+        </div>
+        <div style="text-align:center;">
+          <h6 style="padding: 25px;">Total no. of Users in Database ~ {{totalreg}}</h6>
+        </div>
+      </div>
+    </form>
+  </section>
+  <!--<footer class="page-footer footer-dark" style="padding-top:75px;">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          built for mini project 2022
+        </div> -->
+  <!-- Copyright -->
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var clockElement = document.getElementById('clock');
+
+    function clock() {
+      clockElement.textContent = new Date().toString().slice(15, 24);
+    }
+
+    setInterval(clock, 1000);
+
+  </script>
+</body>
+
+</html>
